@@ -1,12 +1,17 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <vue-board/>
   </div>
 </template>
 
 <script>
+import VueBoard from './components/VueBoard'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    VueBoard
+  }
 }
 </script>
 
