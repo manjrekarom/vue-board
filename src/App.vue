@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <vue-board :editMode="true">
-      <vue-widget-container :layout="layout" v-for="(item, index) in layout" :key="index">
+      <vue-widget-container v-for="(item, index) in layout" :key="index" v-bind="item">
         <vue-widget></vue-widget>
       </vue-widget-container>
     </vue-board>
@@ -10,11 +10,18 @@
 
 <script>
 import VueBoard from './components/VueBoard'
+import VueWidgetContainer from './components/VueWidgetContainer'
 
 export default {
   name: 'App',
   components: {
-    VueBoard
+    VueBoard,
+    VueWidgetContainer
+  },
+  data () {
+    return {
+      layout: []
+    }
   }
 }
 </script>

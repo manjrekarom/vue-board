@@ -1,13 +1,23 @@
 <template>
-    <div>
+    <div class="vue-board">
         <add-element v-if="editMode" @add-widget="addWidget"/>
-        <grid-layout :layout="layout">
+        <grid-layout :layout="layout"
+            :col-num="12"
+            :row-height="30"
+            :is-draggable="true"
+            :is-resizable="true"
+            :is-mirrored="false"
+            :vertical-compact="true"
+            :margin="[10, 10]"
+            :use-css-transforms="true">
             <slot></slot>
         </grid-layout>
     </div>
 </template>
-<style>
-
+<style scoped>
+    .vue-board {
+        background-color: burlywood;
+    }
 </style>
 <script>
 import {GridLayout, GridItem} from 'vue-grid-layout'
@@ -30,7 +40,9 @@ export default {
         return {
             datasources: [],
             widgets: [],
-            layout: []
+            layout: [{"x":0,"y":0,"w":2,"h":2,"i":"0"},
+	                {"x":2,"y":0,"w":2,"h":4,"i":"1"},
+	                {"x":4,"y":0,"w":2,"h":5,"i":"2"}]
         }
     },
     methods: {
