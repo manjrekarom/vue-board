@@ -12,6 +12,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "gridstack": "^0.4.0",
     "vue": "^2.5.2",
     "vue-grid-layout": "^2.1.13",
     "vue-router": "^3.0.1"
