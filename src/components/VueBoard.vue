@@ -1,7 +1,7 @@
 <template>
     <div class="vue-board">
         <add-element v-if="editMode" @add-widget="addWidget"/>
-        <grid-layout :layout="layout"
+        <!-- <grid-layout :layout="layout"
             :col-num="12"
             :row-height="30"
             :is-draggable="true"
@@ -11,7 +11,19 @@
             :margin="[10, 10]"
             :use-css-transforms="true">
             <slot></slot>
-        </grid-layout>
+        </grid-layout> -->
+        <div class="grid-stack">
+            <div class="grid-stack-item"
+                data-gs-x="0" data-gs-y="0"
+                data-gs-width="4" data-gs-height="2">
+            <div class="grid-stack-item-content"></div>
+        </div>
+    <div class="grid-stack-item"
+        data-gs-x="4" data-gs-y="0"
+        data-gs-width="4" data-gs-height="4">
+            <div class="grid-stack-item-content"></div>
+    </div>
+</div>
     </div>
 </template>
 <style scoped>

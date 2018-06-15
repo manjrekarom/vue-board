@@ -10,7 +10,7 @@
 </style>
 <script>
 import {GridItem} from 'vue-grid-layout';
-
+import gridstack from 'gridstack'
 import Layout from '../services/Layout'
 import EventBus from '../services/EventBus'
 
@@ -19,14 +19,15 @@ export default {
     components: {
         GridItem
     },
-    props: ['x', 'y', 'h', 'w', 'i'],
+    props: ['x', 'y', 'w', 'h', 'i'],
     data () {
         return {
             
         }
     },
-    created () {
-        this.x
+    mounted () {
+        let layout = new Layout(this.x, this.y, this.w, this.h)
+        GridStack
     }
 }
 </script>

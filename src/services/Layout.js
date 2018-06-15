@@ -1,10 +1,11 @@
 class Layout {
+    _count = 0 
     constructor (x, y, w, h) {
         this._x = x
         this._y = y
         this._w = w
         this._h = h
-        this._i = Layout.i
+        this._i = _count++
     }
 
     get x () {
@@ -23,8 +24,12 @@ class Layout {
         return this._h
     }
 
-    static get i () {
-        this._i
+    get i () {
+        return this._i
+    }
+
+    static get count () {
+        return _count
     }
     
     set x (x) {
@@ -43,7 +48,7 @@ class Layout {
         this._h = h
     }
 
-    static set i (idx) {
-        this._i = idx
+    set i (i) {
+        this._i = i
     }
 }
