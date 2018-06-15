@@ -1,13 +1,13 @@
 class Layout {
-    _count = 0 
-    constructor (x, y, w, h) {
+    constructor (x, y, w, h, i) {
         this._x = x
         this._y = y
         this._w = w
         this._h = h
-        this._i = _count++
+        this._i = i
     }
 
+    // getters
     get x () {
         return this._x
     }
@@ -27,11 +27,8 @@ class Layout {
     get i () {
         return this._i
     }
-
-    static get count () {
-        return _count
-    }
     
+    // setters
     set x (x) {
         this._x = x
     }
@@ -52,3 +49,5 @@ class Layout {
         this._i = i
     }
 }
+
+export default Layout

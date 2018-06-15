@@ -1,13 +1,10 @@
 import Vue from 'vue'
 
-class EventBus extends Vue {
-    constructor() {
-        super() 
-    }
+const EventBus = new Vue()
 
+class Event {
     static get LAYOUT_ADD () {
-        return 'layout_add'
+        return 'LAYOUT_ADD'
     }
 }
-
-export default new EventBus
+export {EventBus, Event}
