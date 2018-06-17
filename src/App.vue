@@ -11,13 +11,15 @@
 <script>
 import VueBoard from './components/VueBoard'
 import VueWidgetContainer from './components/VueWidgetContainer'
+import VueWidget from './components/VueWidget'
 
 export default {
   name: 'App',
 
   components: {
     VueBoard,
-    VueWidgetContainer
+    VueWidgetContainer,
+    VueWidget
   },
 
   data () {

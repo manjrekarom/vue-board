@@ -4,6 +4,7 @@
         <div class="grid-stack">
             <slot></slot>    
         </div>
+        <!-- Include VueWidgetContainer to add if AddElement -->
     </div>
 </template>
 
@@ -43,26 +44,38 @@ export default {
         }
     },
 
+    methods: {
+        addWidget () {
+            this.layout.push({"x":0,"y":0,"w":2,"h":2,"i":"0"})
+        }
+    },
+
     created () {
         console.log('Created', this.$options.name)
+        
         EventBus.$on(Event.LAYOUT_ADD, (layout) => {
             this.layout.push(layout)
+        })
+
+        EventBus.$on(Event.GRID_ITEM_ADD, (index) => {
+            console.log('Widget added ', index)
+            // this.grid = $('.grid-stack', this.$el).data('gridstack')
+            EventBus.$emit(Event.GRID_ADD + index, $('.grid-stack', this.$el))
         })
     },
 
     mounted () {
         this.$nextTick(function () {
             // code that assumes this.$el is in-document
-            $('.grid-stack').gridstack({
+            console.log($('.grid-stack', this.$el))
+            $('.grid-stack', this.$el).gridstack({
                 width: 12
             })
-        })
-    },
 
-    methods: {
-        addWidget () {
-            this.layout.push({"x":0,"y":0,"w":2,"h":2,"i":"0"})
-        }
+            this.grid = $('.grid-stack', this.$el).data('gridstack')
+            console.log(this.grid)
+            EventBus.$emit(Event.GRID_ADD, this.grid)
+        })
     }
 }
 </script>

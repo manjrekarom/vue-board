@@ -1,5 +1,5 @@
 <template>
-    <div class="main"></div>
+    <div class="vue-widget"></div>
 </template>
 <style scoped>
     main {
