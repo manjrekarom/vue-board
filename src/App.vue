@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <vue-board :editMode="true">
+    <vue-board :editMode="true" :layout="layout">
       <vue-widget-container v-for="(item, index) in layout" :key="index" v-bind="item">
-        <vue-widget></vue-widget>
+        {{item.i}}
       </vue-widget-container>
     </vue-board>
   </div>

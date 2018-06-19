@@ -1,10 +1,18 @@
 <template>
     <div class="vue-board">
-        <add-element v-if="editMode" @add-widget="addWidget"/>
-        <div class="grid-stack">
-            <slot></slot>    
-        </div>
-        <!-- Include VueWidgetContainer to add if AddElement -->
+        <add-element v-if="editMode"/>
+        <grid-layout
+            :layout="layout"
+            :col-num="12"
+            :row-height="30"
+            :is-draggable="true"
+            :is-resizable="true"
+            :is-mirrored="false"
+            :vertical-compact="true"
+            :margin="[10, 10]"
+            :use-css-transforms="true">
+            <slot></slot>
+        </grid-layout>
     </div>
 </template>
 
@@ -15,8 +23,7 @@
 </style>
 
 <script>
-import gridstack from 'gridstack'
-import $ from 'jquery'
+import GridLayout from './GridLayout'
 
 import {Event, EventBus} from '../services/EventBus'
 import AddElement from './AddElement'
@@ -25,13 +32,18 @@ export default {
     name: 'VueBoard',
 
     components: {
-        AddElement
+        AddElement,
+        GridLayout
     },
 
     props: {
         editMode: {
             type: Boolean,
             default: false
+        },
+        layout: {
+            type: Array,
+            required: true
         }
     },
 
@@ -39,43 +51,25 @@ export default {
         return {
             datasources: [],
             widgets: [],
-            layout: [],
             grid: {}
         }
     },
 
     methods: {
-        addWidget () {
-            this.layout.push({"x":0,"y":0,"w":2,"h":2,"i":"0"})
-        }
+
     },
 
     created () {
         console.log('Created', this.$options.name)
-        
-        EventBus.$on(Event.LAYOUT_ADD, (layout) => {
-            this.layout.push(layout)
-        })
+        let self = this
 
-        EventBus.$on(Event.GRID_ITEM_ADD, (index) => {
-            console.log('Widget added ', index)
-            // this.grid = $('.grid-stack', this.$el).data('gridstack')
-            EventBus.$emit(Event.GRID_ADD + index, $('.grid-stack', this.$el))
-        })
+        // EventBus.$on(Event.VWC_ADDED, (layout) => {
+        //     self.layout.push(layout)
+        // })
     },
 
     mounted () {
-        this.$nextTick(function () {
-            // code that assumes this.$el is in-document
-            console.log($('.grid-stack', this.$el))
-            $('.grid-stack', this.$el).gridstack({
-                width: 12
-            })
-
-            this.grid = $('.grid-stack', this.$el).data('gridstack')
-            console.log(this.grid)
-            EventBus.$emit(Event.GRID_ADD, this.grid)
-        })
+        console.log('Mounted', this.$options.name)
     }
 }
 </script>
