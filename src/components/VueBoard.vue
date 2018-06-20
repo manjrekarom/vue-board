@@ -1,7 +1,7 @@
 <template>
     <div class="vue-board">
         <add-element v-if="editMode"/>
-        <grid-layout
+        <vue-widget-grid
             :layout="layout"
             :col-num="12"
             :row-height="30"
@@ -12,7 +12,7 @@
             :margin="[10, 10]"
             :use-css-transforms="true">
             <slot></slot>
-        </grid-layout>
+        </vue-widget-grid>
     </div>
 </template>
 
@@ -23,7 +23,7 @@
 </style>
 
 <script>
-import GridLayout from './GridLayout'
+import VueWidgetGrid from './VueWidgetGrid'
 
 import {Event, EventBus} from '../services/EventBus'
 import AddElement from './AddElement'
@@ -33,7 +33,7 @@ export default {
 
     components: {
         AddElement,
-        GridLayout
+        VueWidgetGrid
     },
 
     props: {
