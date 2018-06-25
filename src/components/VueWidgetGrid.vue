@@ -11,13 +11,16 @@
         </vue-widget-container>
     </div>
 </template>
+
 <style>
     .vue-grid-layout {
         position: relative;
         transition: height 200ms ease;
     }
 </style>
+
 <script>
+    // This component acts as Grid layout
     import Vue from 'vue';
     var elementResizeDetectorMaker = require("element-resize-detector");
 

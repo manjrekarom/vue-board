@@ -1,6 +1,6 @@
 <template>
     <div class="vue-board">
-        <add-element v-if="editMode"/>
+        <add-element v-if="editMode" @layout-add="addLayout(event)" @datasource-add="addDatasource(event)"/>
         <vue-widget-grid
             :layout="layout"
             :col-num="12"
@@ -44,25 +44,34 @@ export default {
         layout: {
             type: Array,
             required: true
+        },
+        datasources: {
+            type: Array,
+            required: true
         }
     },
 
     data () {
         return {
-            datasources: [],
             widgets: [],
-            grid: {}
+            grid: []
         }
     },
 
     methods: {
-
+        addLayout (event) {
+            this.layout.push(event)
+        },
+        addDatasource (event) {
+            this.datasource.push(datasource)
+        }
     },
 
     created () {
         console.log('Created', this.$options.name)
         let self = this
 
+        EventBus.$emit('LAYOUT')
         // EventBus.$on(Event.VWC_ADDED, (layout) => {
         //     self.layout.push(layout)
         // })

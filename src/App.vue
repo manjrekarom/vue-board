@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <vue-board :editMode="true" :layout="layout">
+    <vue-board :editMode="true" :layout="layout" :datasources="datasources">
       <vue-widget-container v-for="(item, index) in layout" :key="index" v-bind="item">
         {{item.i}}
       </vue-widget-container>
@@ -24,7 +24,9 @@ export default {
 
   data () {
     return {
-      layout: []
+      layout: [],
+      widget: [],
+      datasources: []
     }
   }
 }

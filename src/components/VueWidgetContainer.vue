@@ -9,6 +9,7 @@
         <!--<span v-if="draggable" ref="dragHandle" class="vue-draggable-handle"></span>-->
     </div>
 </template>
+
 <style>
     .vue-grid-item {
         transition: all 200ms ease;
@@ -80,7 +81,9 @@
         user-select: none;
     }
 </style>
+
 <script>
+    // This component acts as Grid item
     import {setTopLeft, setTopRight, setTransformRtl, setTransform, createMarkup, getLayoutItem} from './utils';
     import {getControlPosition, offsetXYFromParentOf, createCoreData} from './draggableUtils';
     //    var eventBus = require('./eventBus');
