@@ -19,17 +19,18 @@ export default {
     
     data () {
         return {
+            layout: {"x":0, "y":0, "w":2,"h":1,"i":11},
             i: 0
         }
     },
 
     methods: {
         addWidget () {
-            this.$emit('layout-add', this.layout[this.i++])
+            this.$emit('layout-add', this.layout)
         },
 
         addDatasource () {
-            this.$emit('datasource-add', {'ds': i})
+            this.$emit('datasource-add', {'ds': this.i++})
         }
     }
 }

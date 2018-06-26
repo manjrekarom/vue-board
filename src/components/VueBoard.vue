@@ -1,6 +1,6 @@
 <template>
     <div class="vue-board">
-        <add-element v-if="editMode" @layout-add="addLayout(event)" @datasource-add="addDatasource(event)"/>
+        <add-element v-if="editMode" @layout-add="addLayout" @datasource-add="addDatasource"/>
         <vue-widget-grid
             :layout="layout"
             :col-num="12"
@@ -60,10 +60,16 @@ export default {
 
     methods: {
         addLayout (event) {
+            console.log(event)
             this.layout.push(event)
+            console.log(this.layout);
         },
         addDatasource (event) {
-            this.datasource.push(datasource)
+            console.log(event);
+            
+            this.datasources.push(event)
+            console.log(this.datasources);
+            
         }
     },
 
