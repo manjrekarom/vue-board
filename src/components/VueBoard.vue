@@ -43,11 +43,13 @@ export default {
         },
         layout: {
             type: Array,
-            required: true
+            required: true,
+            default: () => []
         },
         datasources: {
             type: Array,
-            required: true
+            required: true,
+            default: () => []
         }
     },
 
