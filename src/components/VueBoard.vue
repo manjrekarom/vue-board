@@ -25,7 +25,7 @@
 <script>
 import VueWidgetGrid from './VueWidgetGrid'
 
-import {Event, EventBus} from '../services/EventBus'
+import Events  from '../services/Events'
 import AddElement from './AddElement'
 
 export default {
@@ -79,7 +79,7 @@ export default {
         console.log('Created', this.$options.name)
         let self = this
 
-        EventBus.$emit('LAYOUT')
+        this.$bus.$emit('LAYOUT')
         // EventBus.$on(Event.VWC_ADDED, (layout) => {
         //     self.layout.push(layout)
         // })

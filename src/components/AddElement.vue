@@ -12,21 +12,20 @@
 </style>
 
 <script>
-import {EventBus, Event} from '../services/EventBus'
+import Events from '../services/Events'
 
 export default {
     name: 'AddElement',
     
     data () {
         return {
-            layout: {"x":0, "y":0, "w":2,"h":1,"i":11},
-            i: 0
+
         }
     },
 
     methods: {
         addWidget () {
-            this.$emit('layout-add', this.layout)
+            
         },
 
         addDatasource () {

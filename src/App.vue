@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <vue-board :editMode="true" :datasources="datasources" :layout="layout">
+    <vue-board 
+      :editMode="true" 
+      :datasources="datasources" 
+      :layout="layout">
       <vue-widget-container v-for="(item, index) in layout" :key="index" v-bind="item">
         <vue-widget :type="'line'" :chartData="{}" :chartOptions="{}"/>
       </vue-widget-container>
