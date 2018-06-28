@@ -84,8 +84,8 @@
 
 <script>
     // This component acts as Grid item
-    import {setTopLeft, setTopRight, setTransformRtl, setTransform, createMarkup, getLayoutItem} from './utils';
-    import {getControlPosition, offsetXYFromParentOf, createCoreData} from './draggableUtils';
+    import {setTopLeft, setTopRight, setTransformRtl, setTransform, createMarkup, getLayoutItem} from './grid/utils';
+    import {getControlPosition, offsetXYFromParentOf, createCoreData} from './grid/draggableUtils';
     //    var eventBus = require('./eventBus');
 
     var interact = require("interactjs");

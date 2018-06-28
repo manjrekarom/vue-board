@@ -1,7 +1,10 @@
 <template>
     <div class="vue-widget">
-        <!-- <line-chart  v-if="type=='line'" :data="chartData" :options="chartOptions"></line-chart> -->
-        <line-chart :data='[["Jan", 4], ["Feb", 2], ["Mar", 10], ["Apr", 5], ["May", 3]]' width="800px" height="500px"/>
+        <line-chart  
+            v-if="type=='line'" 
+            :data="chartData" 
+            :options="chartOptions">
+        </line-chart>
     </div>
 </template>
 
@@ -12,14 +15,39 @@
 </style>
 
 <script>
-// import LineChart from './chartjs/LineChart'
+import LineChart from './visualization/LineChart'
+import {DataFetcher} from '../services/Data.js' 
 
 export default {
     name: 'VueWidget',
-    props: [
-        'chartData', 
-        'chartOptions', 
-        'type'
-    ]
+    
+    components: {
+        LineChart
+    },
+
+    props: { 
+        'type': {
+            type: String
+        },
+        'datasource': {
+            type: Object,
+            required: true
+        },
+        'field': {
+            type: String
+        }
+    },
+
+    created () {
+        let dataFetcher = new DataFetcher(this.datasource)
+            setInterval(() => dataFetcher.fetch(), 5000)
+    },
+
+    data () {
+        return {
+            'chartData': [],
+            'chartOptions': {}
+        }
+    }
 }
 </script>

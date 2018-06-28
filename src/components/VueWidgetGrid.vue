@@ -24,8 +24,8 @@
     import Vue from 'vue';
     var elementResizeDetectorMaker = require("element-resize-detector");
 
-    import {bottom, compact, getLayoutItem, moveElement, validateLayout} from './utils';
-    //var eventBus = require('./eventBus');
+    import {bottom, compact, getLayoutItem, moveElement, validateLayout} from './grid/utils';
+    // var eventBus = require('./eventBus');
     import VueWidgetContainer from './VueWidgetContainer.vue'
 
     export default {

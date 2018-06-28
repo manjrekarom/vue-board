@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 class Format {
     static get formats () {
         return ['JSON', 'XML', 'CSV', 'YAML']
@@ -125,8 +127,16 @@ class DataFetcher {
         this._datasource = datasource
     }
 
+    get datasource () {
+        return this._datasource
+    } 
+
     fetch () {
-        
+        // TODO: Check for static values like arrays and return directly the array
+        if (this.datasource.type === Type.INTERVAL) {
+            return axios.get(this.datasource.url);
+        }
+        return Promise.resolve(this.datasource)
     }
 }
 
