@@ -120,4 +120,14 @@ class Datasource {
     }
 }
 
-export {Datasource, Format, Type}
+class DataFetcher {
+    constructor (datasource) {
+        this._datasource = datasource
+    }
+
+    fetch () {
+        
+    }
+}
+
+export {Datasource, DataFetcher, Format, Type}
