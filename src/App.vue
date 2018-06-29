@@ -9,9 +9,9 @@
         :key="index" 
         v-bind="item">
         <vue-widget 
-          :type="'line'" 
-          :chartData="{}" 
-          :chartOptions="{}"/>
+          :type="'line'"
+          :datasource="datasources[0]"
+          :field="'device4.28'"/>
       </vue-widget-container>
     </vue-board>
   </div>
@@ -21,6 +21,7 @@
 import VueBoard from './components/VueBoard'
 import VueWidgetContainer from './components/VueWidgetContainer'
 import VueWidget from './components/VueWidget'
+import { Datasource, Format, Type } from './services/Data';
 
 export default {
   name: 'App',
@@ -37,6 +38,15 @@ export default {
       widget: [],
       datasources: []
     }
+  },
+
+  created () {
+    let datasource = new Datasource('First',
+                                    'http://iot.e-yantra.com/pubsub/shadow/4',
+                                    Format.JSON,
+                                    Type.INTERVAL,
+                                    true)
+    this.datasources.push(datasource)
   }
 }
 </script>

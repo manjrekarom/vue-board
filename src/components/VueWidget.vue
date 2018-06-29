@@ -40,7 +40,11 @@ export default {
 
     created () {
         let dataFetcher = new DataFetcher(this.datasource)
-            setInterval(() => dataFetcher.fetch(), 5000)
+        setInterval(() => {
+            dataFetcher
+            .fetch()
+            .then((result) => console.log)
+        }, 5000)
     },
 
     data () {
