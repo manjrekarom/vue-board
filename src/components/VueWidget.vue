@@ -1,15 +1,14 @@
 <template>
     <div class="vue-widget">
-        <line-chart  
-            v-if="type=='line'" 
+        <component
+            v-bind:is="componentType"
             :data="chartData" 
             :label="name"
             ytitle="Temperature"
             xtitle="Time"
-            :messages="{empty: 'No data'}"
-            >
+            :messages="{empty: 'No data'}">
             <!-- :options="chartOptions"> -->
-        </line-chart>
+        </component>
     </div>
 </template>
 
@@ -65,12 +64,19 @@ export default {
         
         setInterval(() => {
             dataFetcher.fetch()
-                        .then(function(response) {
-                            let data = response.data.state.reported;
-                            console.log(data[self.field])
-                            self.chartData[new Date().toTimeString()] = data[self.field]
-                        })
+                .then(function(response) {
+                    let data = response.data.state.reported;
+                    console.log(data[self.field])
+                    self.chartData[new Date().toTimeString()] = data[self.field]
+                })
         }, 5000)
+    },
+
+    computed: {
+        componentType () {
+            if (this.type === 'line') 
+                return 'line-chart'
+        }
     }
 }
 </script>
