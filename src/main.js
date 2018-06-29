@@ -4,7 +4,13 @@ import Vue from 'vue'
 import axios from 'axios'
 import VueChartkick from 'vue-chartkick'
 import Chart from 'chart.js'
+
+import VueMaterial from 'vue-material'
+import 'vue-material/dist/vue-material.min.css'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
+
 import App from './App'
+
 
 Vue.config.productionTip = false
 
@@ -26,6 +32,8 @@ Object.defineProperties(Vue.prototype, {
 })
 
 // Using plugins 
+// Vue.use(Vuetify)
+Vue.use(VueMaterial)
 Vue.use(VueChartkick, {adapter: Chart})
 
 /* eslint-disable no-new */
