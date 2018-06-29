@@ -1,6 +1,9 @@
+'use strict'
+
 import axios from 'axios'
 
 class Format {
+
     static get formats () {
         return ['JSON', 'XML', 'CSV', 'YAML']
     }
@@ -23,6 +26,7 @@ class Format {
 }
 
 class Type {
+
     static get types () {
         return ['INTERVAL', 'WEBSOCKET']
     }
@@ -37,6 +41,7 @@ class Type {
 }
 
 class InvalidFormatException extends Error {
+
     constructor() {
         super(`The message format specified is Invalid. 
         Please specify one amongst JSON, XML, YAML or CSV.`)
@@ -45,6 +50,7 @@ class InvalidFormatException extends Error {
 }
 
 class InvalidIsDeviceShadowException extends Error {
+
     constructor() {
         super('isDeviceShadow should be boolean')
         this.name = 'InvalidIsDeviceShadowException'
@@ -52,6 +58,7 @@ class InvalidIsDeviceShadowException extends Error {
 }
 
 class InvalidTypeException extends Error {
+
     constructor() {
         super(`The type specified is Invalid.
         Should be one of INTERVAL or WEBSOCKET`)
@@ -60,9 +67,17 @@ class InvalidTypeException extends Error {
 }
 
 class Datasource {
-    constructor (name, url, format, type, isDeviceShadow) {
+    
+    constructor (name, 
+                uri, 
+                options = {}, 
+                format = Format.JSON, 
+                type = Type.INTERVAL, 
+                isDeviceShadow) {
+
         this._name = name
-        this._url = url
+        this._uri = uri
+        this._options = options
         this._format = format
         this._type = type
         this._isDeviceShadow = isDeviceShadow
@@ -73,8 +88,12 @@ class Datasource {
         return this._name
     }
 
-    get url () {
-        return this._url
+    get uri () {
+        return this._uri
+    }
+
+    get options () {
+        return this._options
     }
 
     get format () {
@@ -94,9 +113,13 @@ class Datasource {
         this._name = name
     }
 
-    set url (url) {
+    set uri (uri) {
         // TODO: Probably add regex check
-        this._url = url
+        this._uri = uri
+    }
+
+    set options (options) {
+        this._options = options
     }
 
     set format (format) {
@@ -123,18 +146,52 @@ class Datasource {
 }
 
 class DataFetcher {
+
     constructor (datasource) {
         this._datasource = datasource
+
+        if (this.datasource.options) {
+            this._axios = axios.create({
+                baseURL: this.datasource.uri,
+                headers: this.datasource.options.headers || {},
+                timeout: this.datasource.options.timeout || 1000
+            })
+        } else {
+            this._axios = axios.create({
+                baseURL: this.datasource.uri
+            })
+        }
     }
 
     get datasource () {
         return this._datasource
-    } 
+    }
+    
+    set datasource (datasource) {
+        this._datasource = datasource
+        
+        if (this.datasource.options) {
+            this._axios = axios.create({
+                baseURL: this.datasource.uri,
+                headers: this.datasource.options.headers || {},
+                timeout: this.datasource.options.timeout || 1000
+            })
+        } else {
+            this._axios = axios.create({
+                baseURL: this.datasource.uri
+            })
+        }
+    }
+
+    get axios () {
+        return this._axios
+    }
 
     fetch () {
         // TODO: Check for static values like arrays and return directly the array
         if (this.datasource.type === Type.INTERVAL) {
-            return axios.get(this.datasource.url);
+            // Configured axios object instead of default axios
+            return this.axios.get(this.datasource.uri);
         }
         return Promise.resolve(this.datasource)
     }

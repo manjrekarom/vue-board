@@ -3,7 +3,12 @@
         <line-chart  
             v-if="type=='line'" 
             :data="chartData" 
-            :options="chartOptions">
+            :label="name"
+            ytitle="Temperature"
+            xtitle="Time"
+            :messages="{empty: 'No data'}"
+            >
+            <!-- :options="chartOptions"> -->
         </line-chart>
     </div>
 </template>
@@ -15,43 +20,57 @@
 </style>
 
 <script>
-import LineChart from './visualization/LineChart'
+// Using VueChartKick for basic usage
+// import {LineChart} from './visualization/LineChart'
 import {DataFetcher} from '../services/Data.js' 
 
 export default {
     name: 'VueWidget',
     
-    components: {
-        LineChart
-    },
+    // components: {
+    //     LineChart
+    // },
 
-    props: { 
+    props: {
+        // Name of the widget to be used as label 
+        'name': {
+            type: String
+        },
+        // Type of widget: {line, bar, pie}
         'type': {
             type: String
         },
+        // Source of data: {Datasource, Object, Array}
         'datasource': {
             type: Object,
             required: true
         },
+        // Fields to use for displaying from the fetched data
         'field': {
             type: String
         }
     },
 
-    created () {
-        let dataFetcher = new DataFetcher(this.datasource)
-        setInterval(() => {
-            dataFetcher
-            .fetch()
-            .then((result) => console.log)
-        }, 5000)
-    },
-
     data () {
         return {
-            'chartData': [],
+            'chartData': {},
             'chartOptions': {}
         }
+    },
+
+    created () {
+        let self = this;
+        
+        let dataFetcher = new DataFetcher(self.datasource)
+        
+        setInterval(() => {
+            dataFetcher.fetch()
+                        .then(function(response) {
+                            let data = response.data.state.reported;
+                            console.log(data[self.field])
+                            self.chartData[new Date().toTimeString()] = data[self.field]
+                        })
+        }, 5000)
     }
 }
 </script>
