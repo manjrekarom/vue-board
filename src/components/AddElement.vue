@@ -1,10 +1,14 @@
 <template>
     <div class="add-element">
         <div class="buttons">
-            <button @click="addDatasource">Add Datasource</button>
+            <button @click="add-datasource">Add Datasource</button>
             <button @click="addWidget">Add Widget</button>
         </div>
-        <add-datasource/>
+        <div class="modals">
+            <modal name="addDatasource">
+                Add Datasource
+            </modal>
+        </div>
     </div>
 </template>
 
@@ -37,6 +41,7 @@ export default {
         },
 
         addDatasource () {
+            this.$modal.show('add-datasource')
             this.$emit('datasource-add', {'ds': this.i++})
         }
     }
