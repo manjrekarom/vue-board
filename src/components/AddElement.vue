@@ -1,11 +1,11 @@
 <template>
     <div class="add-element">
         <div class="buttons">
-            <button @click="add-datasource">Add Datasource</button>
+            <button @click="addDatasource">Add Datasource</button>
             <button @click="addWidget">Add Widget</button>
         </div>
         <div class="modals">
-            <modal name="addDatasource">
+            <modal name="add-datasource">
                 Add Datasource
             </modal>
         </div>

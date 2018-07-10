@@ -6,14 +6,12 @@ import VueChartkick from 'vue-chartkick'
 import Chart from 'chart.js'
 import VModal from 'vue-js-modal'
 
-// import VueMaterial from 'vue-material'
-// import 'vue-material/dist/vue-material.min.css'
-// import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 import App from './App'
 
 
 Vue.config.productionTip = false
+
 
 // Adding EventBus at $bus
 // Adding axios at $http
@@ -32,9 +30,8 @@ Object.defineProperties(Vue.prototype, {
   }
 })
 
+
 // Using plugins 
-// Vue.use(Vuetify)
-// Vue.use(VueMaterial)
 Vue.use(VModal)
 Vue.use(VueChartkick, {adapter: Chart})
 
