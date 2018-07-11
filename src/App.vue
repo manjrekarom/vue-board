@@ -22,7 +22,6 @@
 import VueBoard from './components/VueBoard'
 import VueWidgetContainer from './components/VueWidgetContainer'
 import VueWidget from './components/VueWidget'
-import AddDatasource from './components/modals/AddDatasource'
 import { Datasource, Format, Type } from './services/Data';
 
 export default {
@@ -31,8 +30,7 @@ export default {
 	components: {
 		VueBoard,
 		VueWidgetContainer,
-		VueWidget,
-		AddDatasource
+		VueWidget
 	},
 
 	data () {

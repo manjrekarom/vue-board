@@ -3,6 +3,9 @@ class Events {
         return 'vwc-added'
     }
 
+    static get ADD_DATASOURCE () {
+        return 'add-datasource'
+    }
 }
 
 export default Events

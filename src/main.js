@@ -5,7 +5,7 @@ import axios from 'axios'
 import VueChartkick from 'vue-chartkick'
 import Chart from 'chart.js'
 import VModal from 'vue-js-modal'
-
+import VeeValidate from 'vee-validate'
 
 import App from './App'
 
@@ -32,8 +32,9 @@ Object.defineProperties(Vue.prototype, {
 
 
 // Using plugins 
-Vue.use(VModal)
+Vue.use(VModal, { dialog: true })
 Vue.use(VueChartkick, {adapter: Chart})
+Vue.use(VeeValidate)
 
 /* eslint-disable no-new */
 new Vue({
