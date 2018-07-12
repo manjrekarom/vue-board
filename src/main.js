@@ -6,6 +6,10 @@ import VueChartkick from 'vue-chartkick'
 import Chart from 'chart.js'
 import VModal from 'vue-js-modal'
 import VeeValidate from 'vee-validate'
+import VueGoodTablePlugin from 'vue-good-table';
+
+// import the styles 
+import 'vue-good-table/dist/vue-good-table.css'
 
 import App from './App'
 
@@ -35,6 +39,8 @@ Object.defineProperties(Vue.prototype, {
 Vue.use(VModal, { dialog: true })
 Vue.use(VueChartkick, {adapter: Chart})
 Vue.use(VeeValidate)
+Vue.use(VueGoodTablePlugin)
+
 
 /* eslint-disable no-new */
 new Vue({
