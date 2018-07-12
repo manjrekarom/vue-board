@@ -75,12 +75,12 @@ class Datasource {
                 type = Type.INTERVAL, 
                 isDeviceShadow) {
 
-        this._name = name
-        this._uri = uri
-        this._options = options
-        this._format = format
-        this._type = type
-        this._isDeviceShadow = isDeviceShadow
+        this.name = name
+        this.uri = uri
+        this.options = options
+        this.format = format
+        this.type = type
+        this.isDeviceShadow = isDeviceShadow
     }
 
     // Getters
@@ -139,7 +139,7 @@ class Datasource {
 
     set isDeviceShadow (isDeviceShadow) {
         if (typeof isDeviceShadow === 'boolean') {
-            this._isDeviceShadow = this.isDeviceShadow
+            this._isDeviceShadow = isDeviceShadow
         }
         else throw InvalidIsDeviceShadowException()
     }
