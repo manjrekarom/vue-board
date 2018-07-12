@@ -64,7 +64,7 @@ export default {
                     let data = response.data.state.reported;
                     console.log(data[that.field])
                     // that.chartData[new Date().toTimeString()] = data[that.field]
-                    Vue.set(that.chartData, new Date().toTimeString(), data[that.field])
+                    that.$set(that.chartData, new Date().toTimeString(), data[that.field])
                 })
         }, 5000)
     },
