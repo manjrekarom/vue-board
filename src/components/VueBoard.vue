@@ -1,6 +1,6 @@
 <template>
     <div class="vue-board">
-        <add-element v-if="editMode" @layout-add="addLayout" @datasource-add="addDatasource"/>
+        <add-element v-if="editMode" @layout-add="addLayout" @add-datasource="addDatasource"/>
         <vue-widget-grid
             :layout="layout"
             :col-num="12"
@@ -17,9 +17,7 @@
 </template>
 
 <style scoped>
-    .vue-board {
-        background-color: burlywood;
-    }
+
 </style>
 
 <script>
@@ -66,7 +64,9 @@ export default {
             this.layout.push(event)
             console.log(this.layout);
         },
+
         addDatasource (event) {
+            console.log('Inside vueboard add Datasource')
             console.log(event);
             
             this.datasources.push(event)
@@ -79,6 +79,7 @@ export default {
         console.log('Created', this.$options.name)
         let self = this
 
+        this.$bus.$on(Events.ADD_DATASOURCE, this.addDatasource)
         this.$bus.$emit('LAYOUT')
         // EventBus.$on(Event.VWC_ADDED, (layout) => {
         //     self.layout.push(layout)

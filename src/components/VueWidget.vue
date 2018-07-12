@@ -5,8 +5,8 @@
             :data="chartData" 
             :label="name"
             ytitle="Temperature"
-            xtitle="Time"
-            :messages="{empty: 'No data'}">
+            xtitle="Time">
+            <!-- :messages="{empty: 'No data'}"> -->
             <!-- :options="chartOptions"> -->
         </component>
     </div>
@@ -25,10 +25,6 @@ import {DataFetcher} from '../services/Data.js'
 
 export default {
     name: 'VueWidget',
-    
-    // components: {
-    //     LineChart
-    // },
 
     props: {
         // Name of the widget to be used as label 
@@ -52,22 +48,23 @@ export default {
 
     data () {
         return {
-            'chartData': {},
-            'chartOptions': {}
+            chartData: {},
+            chartOptions: {}
         }
     },
 
     created () {
-        let self = this;
+        let that = this;
         
-        let dataFetcher = new DataFetcher(self.datasource)
+        let dataFetcher = new DataFetcher(that.datasource)
         
         setInterval(() => {
             dataFetcher.fetch()
                 .then(function(response) {
                     let data = response.data.state.reported;
-                    console.log(data[self.field])
-                    self.chartData[new Date().toTimeString()] = data[self.field]
+                    console.log(data[that.field])
+                    // that.chartData[new Date().toTimeString()] = data[that.field]
+                    Vue.set(that.chartData, new Date().toTimeString(), data[that.field])
                 })
         }, 5000)
     },
