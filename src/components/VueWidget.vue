@@ -12,10 +12,11 @@
     </div>
 </template>
 
-<style scoped>
+<style>
     main {
         background-color: slategrey;
     }
+
 </style>
 
 <script>

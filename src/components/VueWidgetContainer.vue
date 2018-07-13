@@ -2,8 +2,7 @@
     <div ref="item"
          class="vue-grid-item"
          :class="{ 'vue-resizable' : resizable, 'resizing' : isResizing, 'vue-draggable-dragging' : isDragging, 'cssTransforms' : useCssTransforms, 'render-rtl' : renderRtl, 'disable-userselect': isDragging }"
-         :style="style"
-    >
+         :style="style">
         <slot></slot>
         <span v-if="resizable" ref="handle" :class="resizableHandleClass"></span>
         <!--<span v-if="draggable" ref="dragHandle" class="vue-draggable-handle"></span>-->
@@ -17,6 +16,14 @@
         /* add right for rtl */
     }
 
+    .vue-grid-item {
+        border-style: solid;
+        border-width: 1px;
+        padding: 3em 2em 2em 2em;
+        border-color: grey;
+        border-radius: 5px;
+    }
+    
     .vue-grid-item.cssTransforms {
         transition-property: transform;
         left: 0;
