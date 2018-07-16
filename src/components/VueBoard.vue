@@ -1,6 +1,9 @@
 <template>
     <div class="vue-board">
-        <add-element v-if="editMode" @layout-add="addLayout" @add-datasource="addDatasource"/>
+        <add-element v-if="editMode"  
+            :datasources="datasources"
+            @layout-add="addLayout" 
+            @add-datasource="addDatasource"/>
         <vue-widget-grid
             :layout="layout"
             :col-num="12"

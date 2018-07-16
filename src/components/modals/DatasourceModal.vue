@@ -35,7 +35,9 @@
 				<div class="form-group">
 					<label for="format">Update Type</label><br/>
 					<select v-model="datasourceParams.type">
-						<option v-for="(type, idx) in types" v-bind:key="idx">
+						<option v-for="(type, idx) in types" 
+							:value="type"
+							v-bind:key="idx">
 							{{type}}
 						</option>
 					</select> 

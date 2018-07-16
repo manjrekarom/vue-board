@@ -9,16 +9,22 @@
 				<form>
 				<div class="form-group">
 					<label for="name">Name</label>
-					<input type="text" class="form-control" placeholder="Rpi21" v-model="datasourceParams.name">
+					<input type="text" class="form-control" placeholder="Widget1" v-model="widgetParams.name">
 					<small class="form-text text-muted">Name will identify a datasource uniquely</small>
 				</div>
 				<div class="form-group">
-					<label for="uri">URI</label>
-					<input type="text" class="form-control" placeholder="http://iot.e-yantra.com/pubsub/shadow/4" size="32" v-model="datasourceParams.uri">
+					<label for="uri">Datasource</label>
+					<select v-model="widgetParams.datasource">
+						<option v-for="(datasource, idx) in datasources" 
+							:value="idx"
+							:key="idx">
+							{{datasource.name}}
+						</option>
+					</select> 
 				</div>
 				<div class="form-group">
 					<label for="options">Options</label>
-					<input type="text" class="form-control" placeholder="{}" v-model="datasourceParams.options">
+					<input type="text" class="form-control" placeholder="{}" v-model="widgetParams.options">
 					<small class="form-text text-muted">Options object like headers, etc.</small>
 				</div>
 				<div class="form-group">
@@ -64,7 +70,13 @@ import Events from '../../services/Events.js'
 export default {
 	name: 'WidgetModal',
 
-	props: [],
+	props: {
+		datasources: {
+            type: Array,
+            required: true,
+            default: () => []
+        }
+	},
 
 	data () {
 		return {

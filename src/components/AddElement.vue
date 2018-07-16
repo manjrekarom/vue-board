@@ -31,6 +31,14 @@ export default {
         VueGoodTable
     },
 
+    props: {
+        datasources: {
+            type: Array,
+            required: true,
+            default: () => []
+        }
+    },
+
     data () {
         return {
 
