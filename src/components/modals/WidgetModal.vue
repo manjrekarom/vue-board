@@ -7,46 +7,36 @@
 			</div>
 			<div class="content">
 				<form>
-				<div class="form-group">
-					<label for="name">Name</label>
-					<input type="text" class="form-control" placeholder="Widget1" v-model="widgetParams.name">
-					<small class="form-text text-muted">Name will identify a datasource uniquely</small>
-				</div>
-				<div class="form-group">
-					<label for="uri">Datasource</label>
-					<select v-model="widgetParams.datasource">
-						<option v-for="(datasource, idx) in datasources" 
-							:value="idx"
-							:key="idx">
-							{{datasource.name}}
-						</option>
-					</select> 
-				</div>
-				<div class="form-group">
-					<label for="options">Options</label>
-					<input type="text" class="form-control" placeholder="{}" v-model="widgetParams.options">
-					<small class="form-text text-muted">Options object like headers, etc.</small>
-				</div>
-				<div class="form-group">
-					<label for="format">Data format</label><br/>
-					<select v-model="datasourceParams.format">
-						<option v-for="(format, idx) in formats" v-bind:key="idx" >
-							{{format}}
-						</option>
-					</select> 
-				</div>
-				<div class="form-group">
-					<label for="format">Update Type</label><br/>
-					<select v-model="datasourceParams.type">
-						<option v-for="(type, idx) in types" v-bind:key="idx">
-							{{type}}
-						</option>
-					</select> 
-				</div>
-				<div class="form-group">
-					<label for="isDeviceShadow">Is device shadow?</label>
-					<input type="checkbox" v-model="datasourceParams.isDeviceShadow">
-				</div>
+					<div class="form-group">
+						<label for="name">Name</label>
+						<input type="text" class="form-control" placeholder="Widget1" v-model="widgetParams.name">
+						<small class="form-text text-muted">Name will identify a datasource uniquely</small>
+					</div>
+					<div class="form-group">
+						<label for="datasource">Datasource</label>
+						<select v-model="widgetParams.datasource">
+							<option v-for="(datasource, idx) in datasources" 
+								:value="idx"
+								:key="idx">
+								{{datasource.name}}
+							</option>
+						</select> 
+					</div>
+					<div class="form-group">
+						<label for="type">Type</label>
+						<select v-model="widgetParams.type">
+							<option v-for="(type, idx) in types" 
+								:value="idx"
+								:key="idx">
+								{{type}}
+							</option>
+						</select> 
+					</div>
+					<div class="form-group">
+						<label for="options">Options</label>
+						<input type="text" class="form-control" placeholder="{}" v-model="widgetParams.options">
+						<small class="form-text text-muted">Options object like headers, etc.</small>
+					</div>
 				</form>
 			</div>
 			<div class="footer">
@@ -66,6 +56,7 @@
 
 import {Datasource, Format, Type, DataFetcher} from '../../services/Data.js'
 import Events from '../../services/Events.js'
+import Widget from '../../services/Widget.js'
 
 export default {
 	name: 'WidgetModal',
@@ -80,15 +71,11 @@ export default {
 
 	data () {
 		return {
-			formats: Format.formats,
-			types: Type.types,
-			datasourceParams: {
+			types: Widget.TYPES,
+			widgetParams: {
 				name: '',
-				uri: '',
-				options: JSON.stringify({}),
-				format: Format.formats[0],
-				type: Type.types[0],
-				isDeviceShadow: false
+				datasource: {},
+				type: Widget.TYPES[0] 
 			}
 		}
 	},
@@ -100,8 +87,8 @@ export default {
 				name: '',
 				uri: '',
 				options: JSON.stringify({}),
-				format: Format.formats[0],
-				type: Type.types[0],
+				format: Format.FORMATS[0],
+				type: Type.TYPES[0],
 				isDeviceShadow: false
 			}
 		},

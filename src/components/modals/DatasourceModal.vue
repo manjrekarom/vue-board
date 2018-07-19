@@ -1,5 +1,6 @@
 <template>
 	<div class="datasource-modal">
+		<!-- TODO: make modal scrollable -->
 		<modal name="datasource-modal"
 			height="auto">
 			<div class="header">
@@ -27,7 +28,7 @@
 				<div class="form-group">
 					<label for="format">Data format</label><br/>
 					<select v-model="datasourceParams.format">
-						<option v-for="(format, idx) in formats" v-bind:key="idx" >
+						<option v-for="(format, idx) in FORMATS" v-bind:key="idx" >
 							{{format}}
 						</option>
 					</select> 
@@ -74,14 +75,14 @@ export default {
 
 	data () {
 		return {
-			formats: Format.formats,
-			types: Type.types,
+			FORMATS: Format.FORMATS,
+			types: Type.TYPES,
 			datasourceParams: {
 				name: '',
 				uri: '',
 				options: JSON.stringify({}),
-				format: Format.formats[0],
-				type: Type.types[0],
+				format: Format.FORMATS[0],
+				type: Type.TYPES[0],
 				isDeviceShadow: false
 			},
 			editor: {}
@@ -110,8 +111,8 @@ export default {
 				name: '',
 				uri: '',
 				options: JSON.stringify({}),
-				format: Format.formats[0],
-				type: Type.types[0],
+				format: Format.FORMATS[0],
+				type: Type.TYPES[0],
 				isDeviceShadow: false
 			}
 		},

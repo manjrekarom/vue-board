@@ -4,7 +4,7 @@ import axios from 'axios'
 
 class Format {
 
-    static get formats () {
+    static get FORMATS () {
         return ['JSON', 'XML', 'CSV', 'YAML']
     }
 
@@ -27,7 +27,7 @@ class Format {
 
 class Type {
 
-    static get types () {
+    static get TYPES () {
         return ['INTERVAL', 'WEBSOCKET']
     }
 
@@ -123,7 +123,7 @@ class Datasource {
     }
 
     set format (format) {
-        if (Format.formats.includes(format)) { 
+        if (Format.FORMATS.includes(format)) { 
             this._format = format
         }
         else throw InvalidFormatException()
@@ -131,7 +131,7 @@ class Datasource {
     }
 
     set type (type) {
-        if (Type.types.includes(type)) {
+        if (Type.TYPES.includes(type)) {
             this._type = type
         }
         else throw InvalidTypeException()

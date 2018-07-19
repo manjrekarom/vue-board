@@ -6,7 +6,7 @@
         </div>
         <div class="modals">
             <datasource-modal/>
-            <widget-modal/>
+            <widget-modal :datasources="datasources"/>
         </div>
     </div>
 </template>

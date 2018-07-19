@@ -2,7 +2,7 @@
 	<div id="app">
 		<vue-board 
 			:editMode="true" 
-			:datasources="datasources" 
+			:datasources="datasources"
 			:layout="layout">
 			<vue-widget-container 
 				v-for="(item, index) in layout" 
