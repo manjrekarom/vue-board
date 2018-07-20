@@ -10,17 +10,17 @@
 					<div class="form-group">
 						<label for="name">Name</label>
 						<input type="text" class="form-control" placeholder="Widget1" v-model="widgetParams.name">
-						<small class="form-text text-muted">Name will identify a datasource uniquely</small>
+						<small class="form-text text-muted">Name will identify a widget uniquely</small>
 					</div>
 					<div class="form-group">
 						<label for="datasource">Datasource</label>
 						<select v-model="widgetParams.datasource">
-							<option v-for="(datasource, idx) in datasources" 
+							<option v-for="(datasource, idx) in datasources"
 								:value="idx"
 								:key="idx">
 								{{datasource.name}}
 							</option>
-						</select> 
+						</select>
 					</div>
 					<div class="form-group">
 						<label for="type">Type</label>
@@ -30,13 +30,12 @@
 								:key="idx">
 								{{type}}
 							</option>
-						</select> 
+						</select>
 					</div>
-					<div class="form-group">
-						<label for="options">Options</label>
-						<input type="text" class="form-control" placeholder="{}" v-model="widgetParams.options">
-						<small class="form-text text-muted">Options object like headers, etc.</small>
-					</div>
+					<!-- <line-widget-option v-if="widgetParams.type == Widget.LINE"/>
+					<gauge-widget-option v-if="widgetParams.type == Widget.GAUGE"/>
+					<slider-widget-option v-if="widgetParams.type == Widget.LINE"/> -->
+					<component v-bind:is="widgetParams.type"/>
 				</form>
 			</div>
 			<div class="footer">
@@ -75,7 +74,7 @@ export default {
 			widgetParams: {
 				name: '',
 				datasource: {},
-				type: Widget.TYPES[0] 
+				type: Widget.TYPES[0]
 			}
 		}
 	},
@@ -95,7 +94,7 @@ export default {
 
 		add () {
 
-			let datasource = new Datasource(this.datasourceParams.name,
+			let widget = new Datasource(this.datasourceParams.name,
 											this.datasourceParams.uri,
 											this.datasourceParams.options,
 											this.datasourceParams.format,
@@ -103,7 +102,7 @@ export default {
 											this.datasourceParams.isDeviceShadow)
 			
 			console.log(datasource)
-			this.$bus.$emit(Events.ADD_DATASOURCE, datasource)
+			this.$bus.$emit(Events.ADD_WIDGET, widget)
 			
 			this.$modal.hide('widget-modal')
 			this.resetFormFields();
