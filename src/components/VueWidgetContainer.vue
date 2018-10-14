@@ -17,9 +17,10 @@
     }
 
     .vue-grid-item {
+        box-sizing: border-box;
+        padding: 3em 3em 3em 3em;
         border-style: solid;
         border-width: 1px;
-        padding: 3em 2em 2em 2em;
         border-color: grey;
         border-radius: 5px;
     }
