@@ -35,7 +35,9 @@
 					<!-- <line-widget-option v-if="widgetParams.type == Widget.LINE"/>
 					<gauge-widget-option v-if="widgetParams.type == Widget.GAUGE"/>
 					<slider-widget-option v-if="widgetParams.type == Widget.LINE"/> -->
-					<component v-bind:is="widgetParams.type"/>
+
+					<!-- Create component -->
+					<!-- <component v-bind:is="widgetParams.type"/> -->
 				</form>
 			</div>
 			<div class="footer">
@@ -68,40 +70,34 @@ export default {
         }
 	},
 
+	// TODO: default widget type should be a number not string like 'line' in widgetParams
 	data () {
 		return {
 			types: Widget.TYPES,
 			widgetParams: {
 				name: '',
 				datasource: {},
-				type: Widget.TYPES[0]
+				type: ''
 			}
 		}
 	},
 
 	methods: {
 		resetFormFields () {
-
-			this.datasourceParams = {
+			this.widgetParams = {
 				name: '',
-				uri: '',
-				options: JSON.stringify({}),
-				format: Format.FORMATS[0],
-				type: Type.TYPES[0],
-				isDeviceShadow: false
+				datasource: '',
+				type: Widget.TYPES[0]
 			}
 		},
 
 		add () {
 
-			let widget = new Datasource(this.datasourceParams.name,
-											this.datasourceParams.uri,
-											this.datasourceParams.options,
-											this.datasourceParams.format,
-											this.datasourceParams.type,
-											this.datasourceParams.isDeviceShadow)
+			let widget = new Widget(this.widgetParams.name,
+									this.datasources[this.widgetParams.datasource],
+									this.widgetParams.type)
 			
-			console.log(datasource)
+			console.log(widget)
 			this.$bus.$emit(Events.ADD_WIDGET, widget)
 			
 			this.$modal.hide('widget-modal')
