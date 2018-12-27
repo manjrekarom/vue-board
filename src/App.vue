@@ -3,15 +3,16 @@
 		<vue-board
 			:editMode="true" 
 			:datasources="datasources"
+			:widgets="widgets"
 			:layout="layout">
 			<vue-widget-container
 				v-for="(item, index) in layout" 
 				:key="index" 
 				v-bind="item">
 				<vue-widget 
-					:type="'line'"
-					:name="datasources[0].name"
-					:datasource="datasources[0]"
+					:type="widgets[index].type"
+					:name="widgets[index].name"
+					:datasource="widgets[index].datasource"
 					:field="'device13.39'"/>
 			</vue-widget-container>
 		</vue-board>
@@ -36,7 +37,7 @@ export default {
 	data () {
 		return {
 			layout: [],
-			widget: [],
+			widgets: [],
 			datasources: []
 		}
 	},

@@ -26,7 +26,7 @@
 						<label for="type">Type</label>
 						<select v-model="widgetParams.type">
 							<option v-for="(type, idx) in types" 
-								:value="idx"
+								:value="type"
 								:key="idx">
 								{{type}}
 							</option>
@@ -77,13 +77,14 @@ export default {
 			widgetParams: {
 				name: '',
 				datasource: {},
-				type: ''
+				type: Widget.TYPES[0]
 			}
 		}
 	},
 
 	methods: {
 		resetFormFields () {
+
 			this.widgetParams = {
 				name: '',
 				datasource: '',

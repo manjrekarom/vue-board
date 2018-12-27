@@ -15,10 +15,10 @@ class Widget {
         return 'slider'
     }
 
-    constructor (name, datasource, widgetType) {
+    constructor (name, datasource, type) {
         this.name = name
         this.datasource = datasource
-        this.widgetType = widgetType
+        this.type = type
     }
 
     // Getters
@@ -30,8 +30,8 @@ class Widget {
         return this._datasource
     }
 
-    get widgetType () {
-        return this._widgetType
+    get type () {
+        return this._type
     }
 
     set name (name) {
@@ -43,8 +43,8 @@ class Widget {
         this._datasource = datasource
     }
 
-    set widgetType (widgetType) {
-        this._widgetType = widgetType
+    set type (type) {
+        this._type = type
     }
 
 }

@@ -16,7 +16,6 @@
     main {
         background-color: slategrey;
     }
-
 </style>
 
 <script>
@@ -50,17 +49,18 @@ export default {
     data () {
         return {
             chartData: {},
-            chartOptions: {}
+            chartOptions: {},
+            dataFetcher: {}
         }
     },
 
     created () {
         let that = this;
         
-        let dataFetcher = new DataFetcher(that.datasource)
+        that.dataFetcher = new DataFetcher(that.datasource)
         
         setInterval(() => {
-            dataFetcher.fetch()
+            that.dataFetcher.fetch()
                 .then(function(response) {
                     let data = response.data.state.reported;
                     console.log(data[that.field])

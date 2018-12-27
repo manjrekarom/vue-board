@@ -154,7 +154,7 @@ class DataFetcher {
             this._axios = axios.create({
                 baseURL: this.datasource.uri,
                 headers: this.datasource.options.headers || {},
-                timeout: this.datasource.options.timeout || 1000
+                timeout: this.datasource.options.timeout || 2000
             })
         } else {
             this._axios = axios.create({

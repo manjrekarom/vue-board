@@ -28,6 +28,7 @@ import VueWidgetGrid from './VueWidgetGrid'
 
 import Events  from '../services/Events'
 import AddElement from './AddElement'
+import Widget from '../services/Widget';
 
 export default {
     name: 'VueBoard',
@@ -51,34 +52,39 @@ export default {
             type: Array,
             required: true,
             default: () => []
+        },
+        widgets: {
+            type: Array,
+            required: true,
+            default: () => []
         }
     },
 
     data () {
         return {
-            widgets: [],
             grid: [],
             i: 0
         }
     },
 
     methods: {
-        addLayout (event) {
-            console.log(event)
-            this.layout.push(event)
+        addLayout (layout) {
+            console.log(layout)
+            this.layout.push(layout)
             console.log(this.layout);
         },
 
-        addDatasource (event) {
+        addDatasource (datasource) {
             console.log('Inside vueboard add Datasource')
-            console.log(event);
+            console.log(datasource);
             
-            this.datasources.push(event)
+            this.datasources.push(datasource)
             console.log(this.datasources);
         },
 
         addWidget (widget) {
-            this.layout.push({"x": 0, "y": 0, "h": 2, "w": 2, "i": this.i})
+            this.widgets.push(widget)
+            this.layout.push({"x": 0, "y": 0, "h": 9, "w": 4, "i": this.i++})
         }
     },
 
