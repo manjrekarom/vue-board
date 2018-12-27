@@ -10,8 +10,8 @@
 				:key="index" 
 				v-bind="item">
 				<vue-widget 
-					:type="widgets[index].type"
 					:name="widgets[index].name"
+					:type="widgets[index].type"
 					:datasource="widgets[index].datasource"
 					:field="'device13.39'"/>
 			</vue-widget-container>
