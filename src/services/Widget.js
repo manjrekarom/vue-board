@@ -1,6 +1,6 @@
 class Widget {
     static get TYPES () {
-        return [this.LINE, this.GAUGE, this.SLIDER];
+        return [this.LINE, this.GAUGE, this.SLIDER]
     }
 
     static get LINE () {

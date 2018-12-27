@@ -13,9 +13,7 @@ import 'vue-good-table/dist/vue-good-table.css'
 
 import App from './App'
 
-
 Vue.config.productionTip = false
-
 
 // Adding EventBus at $bus
 // Adding axios at $http
@@ -34,13 +32,11 @@ Object.defineProperties(Vue.prototype, {
   }
 })
 
-
 // Using plugins 
 Vue.use(VModal, { dialog: true })
 Vue.use(VueChartkick, {adapter: Chart})
 Vue.use(VeeValidate)
 Vue.use(VueGoodTablePlugin)
-
 
 /* eslint-disable no-new */
 new Vue({

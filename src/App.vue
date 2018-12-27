@@ -1,10 +1,10 @@
 <template>
 	<div id="app">
-		<vue-board 
+		<vue-board
 			:editMode="true" 
 			:datasources="datasources"
 			:layout="layout">
-			<vue-widget-container 
+			<vue-widget-container
 				v-for="(item, index) in layout" 
 				:key="index" 
 				v-bind="item">
