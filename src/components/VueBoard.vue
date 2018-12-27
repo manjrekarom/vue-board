@@ -57,7 +57,8 @@ export default {
     data () {
         return {
             widgets: [],
-            grid: []
+            grid: [],
+            i: 0
         }
     },
 
@@ -74,7 +75,10 @@ export default {
             
             this.datasources.push(event)
             console.log(this.datasources);
-            
+        },
+
+        addWidget (widget) {
+            this.layout.push({"x": 0, "y": 0, "h": 2, "w": 2, "i": this.i})
         }
     },
 
@@ -83,6 +87,7 @@ export default {
         let self = this
 
         this.$bus.$on(Events.ADD_DATASOURCE, this.addDatasource)
+        this.$bus.$on(Events.ADD_WIDGET, this.addWidget)
         this.$bus.$emit('LAYOUT')
         // EventBus.$on(Event.VWC_ADDED, (layout) => {
         //     self.layout.push(layout)

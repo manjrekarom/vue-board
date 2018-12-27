@@ -4,20 +4,49 @@ class Widget {
     }
 
     static get LINE () {
-        return 'line';
+        return 'line'
     }
 
     static get GAUGE () {
-        return 'line';
+        return 'gauge'
     }
 
     static get SLIDER () {
-        return 'line';
+        return 'slider'
     }
 
-    // constructor () {
-    //     this.
-    // }
+    constructor (name, datasource, widgetType) {
+        this.name = name
+        this.datasource = datasource
+        this.widgetType = widgetType
+    }
+
+    // Getters
+    get name () {
+        return this._name
+    }
+
+    get datasource () {
+        return this._datasource
+    }
+
+    get widgetType () {
+        return this._widgetType
+    }
+
+    set name (name) {
+        this._name = name
+    }
+
+    set datasource (datasource) {
+        // TODO: Probably add regex check
+        this._datasource = datasource
+    }
+
+    set widgetType (widgetType) {
+        this._widgetType = widgetType
+    }
+
 }
 
 export default Widget
