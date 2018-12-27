@@ -3,6 +3,7 @@
          class="vue-grid-item"
          :class="{ 'vue-resizable' : resizable, 'resizing' : isResizing, 'vue-draggable-dragging' : isDragging, 'cssTransforms' : useCssTransforms, 'render-rtl' : renderRtl, 'disable-userselect': isDragging }"
          :style="style">
+        <span id="close">X</span>
         <slot></slot>
         <span v-if="resizable" ref="handle" :class="resizableHandleClass"></span>
         <!--<span v-if="draggable" ref="dragHandle" class="vue-draggable-handle"></span>-->
@@ -10,6 +11,15 @@
 </template>
 
 <style>
+    #close {
+        float: right;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        display: inline-block;
+        padding: 2px 5px;
+    }
+
     .vue-grid-item {
         transition: all 200ms ease;
         transition-property: left, top, right;
