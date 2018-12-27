@@ -71,7 +71,11 @@ export default {
         addLayout (layout) {
             console.log(layout)
             this.layout.push(layout)
-            console.log(this.layout);
+            console.log(this.layout)
+        },
+
+        removeLayout (index) {
+            console.log('remove ', index)
         },
 
         addDatasource (datasource) {
@@ -92,9 +96,15 @@ export default {
         console.log('Created', this.$options.name)
         let self = this
 
+        // Add event listeners
+        // Add datasource
         this.$bus.$on(Events.ADD_DATASOURCE, this.addDatasource)
+        // Add widget
         this.$bus.$on(Events.ADD_WIDGET, this.addWidget)
-        this.$bus.$emit('LAYOUT')
+        // Add layout listener 
+        this.$bus.$on()
+        // Idk what this is for
+        // this.$bus.$emit('LAYOUT')
         // EventBus.$on(Event.VWC_ADDED, (layout) => {
         //     self.layout.push(layout)
         // })
