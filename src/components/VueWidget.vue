@@ -67,7 +67,7 @@ export default {
                     // that.chartData[new Date().toTimeString()] = data[that.field]
                     that.$set(that.chartData, new Date().toTimeString().split(' ')[0], data[that.field])
                 })
-        }, 5000)
+        }, 10000)
     },
 
     computed: {
