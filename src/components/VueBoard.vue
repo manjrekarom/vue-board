@@ -24,10 +24,10 @@
 </style>
 
 <script>
-import VueWidgetGrid from './VueWidgetGrid'
+import VueWidgetGrid from './VueWidgetGrid';
 
-import Events  from '../services/Events'
-import AddElement from './AddElement'
+import Events  from '../services/Events';
+import AddElement from './AddElement';
 import Widget from '../services/Widget';
 
 export default {

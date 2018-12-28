@@ -15,6 +15,7 @@
 					<div class="form-group">
 						<label for="datasource">Datasource</label>
 						<select v-model="widgetParams.datasource">
+							<option disabled value="">Please select one</option>
 							<option v-for="(datasource, idx) in datasources"
 								:value="idx"
 								:key="idx">
@@ -25,6 +26,7 @@
 					<div class="form-group">
 						<label for="type">Type</label>
 						<select v-model="widgetParams.type">
+							<option disabled value="">Please select one</option>
 							<option v-for="(type, idx) in types" 
 								:value="type"
 								:key="idx">
@@ -76,8 +78,8 @@ export default {
 			types: Widget.TYPES,
 			widgetParams: {
 				name: '',
-				datasource: {},
-				type: Widget.TYPES[0]
+				datasource: '',
+				type: ''
 			}
 		}
 	},

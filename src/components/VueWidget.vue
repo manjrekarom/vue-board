@@ -21,7 +21,8 @@
 <script>
 // Using VueChartKick for basic usage
 // import {LineChart} from './visualization/LineChart'
-import {DataFetcher} from '../services/Data.js' 
+import {DataFetcher} from '../services/Data';
+import Widget from '../services/Widget';
 
 export default {
     name: 'VueWidget',
@@ -50,7 +51,8 @@ export default {
         return {
             chartData: {},
             chartOptions: {},
-            dataFetcher: {}
+            dataFetcher: {},
+            timer: {}
         }
     },
 
@@ -59,7 +61,7 @@ export default {
         
         that.dataFetcher = new DataFetcher(that.datasource)
         
-        setInterval(() => {
+        that.timer = setInterval(() => {
             that.dataFetcher.fetch()
                 .then(function(response) {
                     let data = response.data.state.reported;
@@ -72,9 +74,19 @@ export default {
 
     computed: {
         componentType () {
-            if (this.type === 'line') 
-                return 'line-chart'
+            console.log(Widget);
+            if (this.type === Widget.LINE) 
+                return 'line-chart';
+            // else if (this.type === Widget.GAUGE) 
+            //     return 'gauge';
         }
+    },
+
+    destroyed: function () {
+        // clean up
+        let that = this;
+        clearInterval(that.timer);
+        console.log('VueWidget destroyed!');
     }
 }
 </script>
