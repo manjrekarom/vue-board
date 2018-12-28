@@ -3,7 +3,7 @@
          class="vue-grid-item"
          :class="{ 'vue-resizable' : resizable, 'resizing' : isResizing, 'vue-draggable-dragging' : isDragging, 'cssTransforms' : useCssTransforms, 'render-rtl' : renderRtl, 'disable-userselect': isDragging }"
          :style="style">
-        <span id="close">X</span>
+        <span id="close" @click="deleteContainer">X</span>
         <slot></slot>
         <span v-if="resizable" ref="handle" :class="resizableHandleClass"></span>
         <!--<span v-if="draggable" ref="dragHandle" class="vue-draggable-handle"></span>-->
@@ -104,7 +104,9 @@
     // This component acts as Grid item
     import {setTopLeft, setTopRight, setTransformRtl, setTransform, createMarkup, getLayoutItem} from './grid/utils';
     import {getControlPosition, offsetXYFromParentOf, createCoreData} from './grid/draggableUtils';
-    //    var eventBus = require('./eventBus');
+    
+    import Events from '../services/Events.js';
+    // var eventBus = require('./eventBus');
 
     var interact = require("interactjs");
 
@@ -152,15 +154,17 @@
              default: false
              },
              */
+            // Modified minimum height to be 9
             minH: {
                 type: Number,
                 required: false,
-                default: 1
+                default: 9
             },
+            // Modified minimum weight to be 4
             minW: {
                 type: Number,
                 required: false,
-                default: 1
+                default: 4
             },
             maxH: {
                 type: Number,
@@ -430,6 +434,11 @@
             }
         },
         methods: {
+            deleteContainer: function () {
+                console.log(this.i);
+                console.log(this.$bus);
+                this.$bus.$emit(Events.REMOVE_LAYOUT, this.i);
+            },
             createStyle: function () {
                 if (this.x + this.w > this.cols) {
                     this.innerX = 0;

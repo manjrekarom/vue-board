@@ -69,40 +69,46 @@ export default {
 
     methods: {
         addLayout (layout) {
-            console.log(layout)
-            this.layout.push(layout)
-            console.log(this.layout)
+            console.log(layout);
+            this.layout.push(layout);
+            console.log(this.layout);
         },
 
         removeLayout (index) {
-            console.log('remove ', index)
+            console.log('remove ', index);
+            // this.layout.splice(index, 1);
+            let array_idx = this.layout.findIndex((el) => {
+                return el.i == index;
+            })
+            this.layout.splice(array_idx, 1);
+            this.widgets.splice(array_idx, 1);
         },
 
         addDatasource (datasource) {
-            console.log('Inside vueboard add Datasource')
+            console.log('Inside vueboard add Datasource');
             console.log(datasource);
             
-            this.datasources.push(datasource)
+            this.datasources.push(datasource);
             console.log(this.datasources);
         },
 
         addWidget (widget) {
-            this.widgets.push(widget)
-            this.layout.push({"x": 0, "y": 0, "h": 9, "w": 4, "i": this.i++})
+            this.widgets.push(widget);
+            this.layout.push({"x": 0, "y": 0, "h": 9, "w": 4, "i": this.i++});
         }
     },
 
     created () {
-        console.log('Created', this.$options.name)
-        let self = this
+        console.log('Created', this.$options.name);
+        let self = this;
 
         // Add event listeners
         // Add datasource
-        this.$bus.$on(Events.ADD_DATASOURCE, this.addDatasource)
+        this.$bus.$on(Events.ADD_DATASOURCE, this.addDatasource);
         // Add widget
-        this.$bus.$on(Events.ADD_WIDGET, this.addWidget)
+        this.$bus.$on(Events.ADD_WIDGET, this.addWidget);
         // Add layout listener 
-        this.$bus.$on()
+        this.$bus.$on(Events.REMOVE_LAYOUT, this.removeLayout);
         // Idk what this is for
         // this.$bus.$emit('LAYOUT')
         // EventBus.$on(Event.VWC_ADDED, (layout) => {
