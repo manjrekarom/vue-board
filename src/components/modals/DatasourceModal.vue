@@ -118,6 +118,9 @@ export default {
 		},
 
 		save () {
+			// Hide modal first to avoid multiple clicks
+			this.$modal.hide('datasource-modal')
+			
 			let datasource = new Datasource(this.datasourceParams.name,
 											this.datasourceParams.uri,
 											JSON.parse(this.datasourceParams.options),
@@ -128,7 +131,6 @@ export default {
 			console.log(datasource)
 			this.$bus.$emit(Events.ADD_DATASOURCE, datasource)
 			
-			this.$modal.hide('datasource-modal')
 			this.resetFormFields();
 		},
 

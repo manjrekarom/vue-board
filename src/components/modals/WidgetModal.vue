@@ -93,15 +93,15 @@ export default {
 		},
 
 		add () {
-
+			// Hide modal first to avoid multiple clicks
+			this.$modal.hide('widget-modal')
 			let widget = new Widget(this.widgetParams.name,
 									this.datasources[this.widgetParams.datasource],
 									this.widgetParams.type)
 			
-			console.log(widget)
-			this.$bus.$emit(Events.ADD_WIDGET, widget)
+			// console.log(widget);
+			this.$bus.$emit(Events.ADD_WIDGET, widget);
 			
-			this.$modal.hide('widget-modal')
 			this.resetFormFields();
 		},
 
