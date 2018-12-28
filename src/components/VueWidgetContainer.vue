@@ -3,7 +3,8 @@
          class="vue-grid-item"
          :class="{ 'vue-resizable' : resizable, 'resizing' : isResizing, 'vue-draggable-dragging' : isDragging, 'cssTransforms' : useCssTransforms, 'render-rtl' : renderRtl, 'disable-userselect': isDragging }"
          :style="style">
-        <span id="close" @click="deleteContainer">X</span>
+        <i id="settings" class="material-icons" @click="settings">settings</i>
+        <i id="close" class="material-icons" @click="deleteContainer">close</i>
         <slot></slot>
         <span v-if="resizable" ref="handle" :class="resizableHandleClass"></span>
         <!--<span v-if="draggable" ref="dragHandle" class="vue-draggable-handle"></span>-->
@@ -11,8 +12,15 @@
 </template>
 
 <style>
+    #settings {
+        position: absolute;
+        top: 5px;
+        right: 40px;
+        display: inline-block;
+        padding: 2px 5px;
+    }
+
     #close {
-        float: right;
         position: absolute;
         top: 5px;
         right: 5px;
@@ -434,6 +442,9 @@
             }
         },
         methods: {
+            settings: function () {
+                this.$bus.$emit(Events.OPEN_SETTINGS);
+            },
             deleteContainer: function () {
                 console.log(this.i);
                 console.log(this.$bus);
