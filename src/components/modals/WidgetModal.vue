@@ -90,7 +90,7 @@ export default {
 			this.widgetParams = {
 				name: '',
 				datasource: '',
-				type: Widget.TYPES[0]
+				type: ''
 			}
 		},
 
