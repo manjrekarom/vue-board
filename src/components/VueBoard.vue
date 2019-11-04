@@ -6,6 +6,7 @@
             @add-datasource="addDatasource"/>
         <vue-widget-grid
             :layout="layout"
+            :responsive=true
             :col-num="12"
             :row-height="30"
             :is-draggable="true"
@@ -24,11 +25,15 @@
 </style>
 
 <script>
-import VueWidgetGrid from './VueWidgetGrid';
+import Vue from 'vue';
+import {GridLayout} from 'vue-grid-layout';
 
 import Events  from '../services/Events';
 import AddElement from './AddElement';
 import Widget from '../services/Widget';
+
+Vue.component('vue-widget-grid', GridLayout);
+let VueWidgetGrid = GridLayout;
 
 export default {
     name: 'VueBoard',
