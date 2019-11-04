@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
-    "test": "npm run unit",
+    "test": "jest",
     "lint": "eslint --ext .js,.vue src test/unit",
     "build": "node build/build.js"
   },
@@ -78,7 +78,7 @@
     "vuelidate": "^0.7.4",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^3.3.2",
-    "webpack-dev-server": "^2.9.1",
+    "webpack-dev-server": "^3.1.11",
     "webpack-merge": "^4.1.0"
   },
   "engines": {
