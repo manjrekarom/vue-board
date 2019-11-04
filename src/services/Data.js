@@ -5,38 +5,42 @@ import axios from 'axios'
 class Format {
 
     static get FORMATS () {
-        return ['JSON', 'XML', 'CSV', 'YAML']
+        return [Format.JSON, Format.XML, Format.CSV, Format.YAML];
     }
 
     static get JSON () {
-        return 'JSON'
+        return 'JSON';
     }
 
     static get XML () {
-        return 'XML'
+        return 'XML';
     }
 
     static get CSV () {
-        return 'CSV'
+        return 'CSV';
     }
 
     static get YAML () {
-        return 'YAML'
+        return 'YAML';
     }
 }
 
 class Type {
 
     static get TYPES () {
-        return ['INTERVAL', 'WEBSOCKET']
+        return [Type.ONCE, Type.INTERVAL, Type.WEBSOCKET];
+    }
+
+    static get ONCE () {
+        return 'ONCE';
     }
 
     static get INTERVAL () {
-        return 'INTERVAL'
+        return 'INTERVAL';
     }
 
     static get WEBSOCKET () {
-        return 'WEBSOCKET'
+        return 'WEBSOCKET';
     }
 }
 
@@ -68,15 +72,19 @@ class InvalidTypeException extends Error {
 
 class Datasource {
     
-    constructor (name, 
-                uri, 
-                options = {}, 
-                format = Format.JSON, 
-                type = Type.INTERVAL, 
-                isDeviceShadow) {
-
+    constructor (
+        name,
+        uri,
+        {
+            options = {},
+            format = Format.JSON,
+            type = Type.INTERVAL,
+            isDeviceShadow = true
+        } = {}) {
+        
         this.name = name
         this.uri = uri
+        // console.log("options", options);
         this.options = options
         this.format = format
         this.type = type
@@ -105,7 +113,7 @@ class Datasource {
     }
 
     get isDeviceShadow () {
-        return this._isisDeviceShadow
+        return this._isDeviceShadow
     }
 
     // Setters
@@ -123,44 +131,34 @@ class Datasource {
     }
 
     set format (format) {
-        if (Format.FORMATS.includes(format)) { 
+        // console.log(format, Format.FORMATS.includes(format));
+        if (Format.FORMATS.includes(format)) {
             this._format = format
         }
-        else throw InvalidFormatException()
-        
+        else throw new InvalidFormatException();
     }
 
     set type (type) {
         if (Type.TYPES.includes(type)) {
             this._type = type
         }
-        else throw InvalidTypeException()
+        else throw new InvalidTypeException()
     }
 
     set isDeviceShadow (isDeviceShadow) {
         if (typeof isDeviceShadow === 'boolean') {
             this._isDeviceShadow = isDeviceShadow
         }
-        else throw InvalidIsDeviceShadowException()
+        else throw new TypeError('isDeviceShadow should be boolean')
     }
 }
+
+
 
 class DataFetcher {
 
     constructor (datasource) {
-        this._datasource = datasource
-
-        if (this.datasource.options) {
-            this._axios = axios.create({
-                baseURL: this.datasource.uri,
-                headers: this.datasource.options.headers || {},
-                timeout: this.datasource.options.timeout || 2000
-            })
-        } else {
-            this._axios = axios.create({
-                baseURL: this.datasource.uri
-            })
-        }
+        this.datasource = datasource
     }
 
     get datasource () {
@@ -172,29 +170,36 @@ class DataFetcher {
         
         if (this.datasource.options) {
             this._axios = axios.create({
-                baseURL: this.datasource.uri,
+                ... this.datasource.options,
+                method: this.datasource.options.method || 'get',
+                url: this.datasource.uri,
                 headers: this.datasource.options.headers || {},
-                timeout: this.datasource.options.timeout || 1000
+                timeout: this.datasource.options.timeout || 1000,
             })
         } else {
             this._axios = axios.create({
-                baseURL: this.datasource.uri
+                url: this.datasource.uri
             })
         }
     }
 
-    get axios () {
+    get httpClient () {
         return this._axios
     }
 
     fetch () {
         // TODO: Check for static values like arrays and return directly the array
-        if (this.datasource.type === Type.INTERVAL) {
+        if (this.datasource.type === Type.ONCE) {
             // Configured axios object instead of default axios
-            return this.axios.get(this.datasource.uri);
+            return this.httpClient(this.datasource.uri);
         }
-        return Promise.resolve(this.datasource)
+        else if (this.datasource.type === Type.INTERVAL) {
+            // Configured axios object instead of default axios
+            return this.httpClient(this.datasource.uri);
+        }
+        return Promise.resolve(this.datasource);
     }
 }
 
-export {Datasource, DataFetcher, Format, Type}
+export {Datasource, DataFetcher, Format, Type, InvalidFormatException, 
+    InvalidIsDeviceShadowException, InvalidTypeException}
