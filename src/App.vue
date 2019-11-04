@@ -20,10 +20,16 @@
 </template>
 
 <script>
+import Vue from 'vue';
+import {GridItem} from 'vue-grid-layout'
+
 import VueBoard from './components/VueBoard'
-import VueWidgetContainer from './components/VueWidgetContainer'
 import VueWidget from './components/VueWidget'
 import { Datasource, Format, Type } from './services/Data';
+
+// aliasing
+Vue.component('vue-widget-container', GridItem);
+let VueWidgetContainer = GridItem;
 
 export default {
 	name: 'App',
@@ -50,12 +56,14 @@ export default {
 			timeout: 2000
 		}
 
-		let datasource = new Datasource('Thing 10',
-										'http://localhost:8002/pubsub/shadow/10',
-										options,								
-										Format.JSON,
-										Type.INTERVAL,
-										true)
+		let datasource = new Datasource(
+			'Thing 10',
+			'http://localhost:8002/pubsub/shadow/10',
+			options,								
+			Format.JSON,
+			Type.INTERVAL,
+			true
+		)
 		this.datasources.push(datasource)
 	}
 }
