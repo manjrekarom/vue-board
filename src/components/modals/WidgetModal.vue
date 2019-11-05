@@ -86,7 +86,6 @@ export default {
 
 	methods: {
 		resetFormFields () {
-
 			this.widgetParams = {
 				name: '',
 				datasource: '',
@@ -103,12 +102,10 @@ export default {
 			
 			// console.log(widget);
 			this.$bus.$emit(Events.ADD_WIDGET, widget);
-			
 			this.resetFormFields();
 		},
 
 		close () {
-
 			this.$modal.hide('widget-modal')
 		}
 	}
