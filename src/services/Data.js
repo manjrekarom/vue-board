@@ -156,46 +156,39 @@ class Datasource {
 
 
 class DataFetcher {
-
     constructor (datasource) {
-        this.datasource = datasource
+        this.datasource = datasource;
     }
 
     get datasource () {
-        return this._datasource
+        return this._datasource;
     }
     
     set datasource (datasource) {
-        this._datasource = datasource
-        
+        this._datasource = datasource;
         if (this.datasource.options) {
             this._axios = axios.create({
                 ... this.datasource.options,
-                method: this.datasource.options.method || 'get',
-                url: this.datasource.uri,
-                headers: this.datasource.options.headers || {},
-                timeout: this.datasource.options.timeout || 1000,
-            })
-        } else {
-            this._axios = axios.create({
                 url: this.datasource.uri
-            })
+            });
+        } else {
+            this._axios = axios.create({url: this.datasource.uri});
         }
     }
 
-    get httpClient () {
-        return this._axios
+    get httpRequest () {
+        return this._axios;
     }
 
     fetch () {
         // TODO: Check for static values like arrays and return directly the array
         if (this.datasource.type === Type.ONCE) {
             // Configured axios object instead of default axios
-            return this.httpClient(this.datasource.uri);
+            return this.httpRequest(this.datasource.uri);
         }
         else if (this.datasource.type === Type.INTERVAL) {
             // Configured axios object instead of default axios
-            return this.httpClient(this.datasource.uri);
+            return this.httpRequest(this.datasource.uri);
         }
         return Promise.resolve(this.datasource);
     }
