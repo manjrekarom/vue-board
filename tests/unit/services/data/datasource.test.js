@@ -1,4 +1,5 @@
-import {Datasource, Type, Format, InvalidFormatException, InvalidTypeException, InvalidIsDeviceShadowException} from '../../../../src/services/Data';
+import {Datasource, Type, Format, InvalidFormatException, InvalidTypeException,
+    InvalidIsDeviceShadowException} from '../../../../src/services/Data';
 
 test('Datasource default instantiation', () => {
     let name = "test-ds";
